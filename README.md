@@ -3,7 +3,13 @@
 
 # 🎯 Lottery Management System (Full-Stack)
 
-A full-stack Lottery Management System built using **Next.js**, **NestJS**, and **PostgreSQL (Prisma)**.
+> A full-stack Lottery Management System built using **Next.js**, **NestJS**, and **PostgreSQL (Prisma)**.
+
+**🔗 Quick Links:**
+
+* **Live Demo (Frontend):** [https://lottery-charity-management-system.netlify.app/](https://lottery-charity-management-system.netlify.app/)
+* **Backend API:** [https://lottary-management-system.onrender.com](https://lottary-management-system.onrender.com)
+* **GitHub Repository:** [https://github.com/Abhishek-Jatav/Lottary-Management-System](https://github.com/Abhishek-Jatav/Lottary-Management-System)
 
 This system allows users to register, submit lottery scores, participate in draws, and claim winnings, while admins manage payments, winners, and draw execution.
 
@@ -13,28 +19,27 @@ This system allows users to register, submit lottery scores, participate in draw
 
 ## 👤 User Features
 
-- User Registration & Login (JWT Authentication)
-- Submit Lottery Scores
-- View Latest Draw Results
-- Payment Submission
-- Winner Claim Submission
-- Dashboard Access
+* User Registration & Login (JWT Authentication)
+* Submit Lottery Scores
+* View Latest Draw Results
+* Payment Submission
+* Winner Claim Submission
+* Dashboard Access
 
 ---
 
 ## 🛠 Admin Features
 
-- Run Lottery Draw
-- Verify Payments
-- Approve Winners
-- Manage System Workflow
+* Run Lottery Draw
+* Verify Payments
+* Approve Winners
+* Manage System Workflow
 
 ---
 
 # 🏗 System Architecture
 
 ```
-
 Frontend (Next.js)
 ↓
 Backend API (NestJS)
@@ -42,7 +47,6 @@ Backend API (NestJS)
 Database (PostgreSQL)
 ↓
 ORM (Prisma)
-
 ```
 
 ---
@@ -51,37 +55,36 @@ ORM (Prisma)
 
 ## Frontend
 
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- Axios
-- React Hot Toast
+* Next.js (App Router)
+* TypeScript
+* Tailwind CSS
+* Axios
+* React Hot Toast
 
 ## Backend
 
-- NestJS
-- Prisma ORM
-- PostgreSQL
-- JWT Authentication
-- Multer (File Uploads)
+* NestJS
+* Prisma ORM
+* PostgreSQL
+* JWT Authentication
+* Multer (File Uploads)
 
 ## Database
 
-- PostgreSQL
-- Prisma ORM
+* PostgreSQL
+* Prisma ORM
 
 ## Deployment
 
-- Frontend → Vercel
-- Backend → Render
-- Database → Supabase
+* Frontend → Vercel
+* Backend → Render
+* Database → Supabase
 
 ---
 
 # 📂 Project Structure
 
 ```
-
 lottery-system/
 │
 ├── frontend/
@@ -103,7 +106,6 @@ lottery-system/
 │
 ├── README.md
 └── .gitignore
-
 ```
 
 ---
@@ -133,19 +135,15 @@ lottery-system/
 ## Backend `.env`
 
 ```
-
 DATABASE_URL=your_database_url
 JWT_SECRET=your_secret_key
 PORT=3001
-
 ```
 
 ## Frontend `.env.local`
 
 ```
-
-NEXT_PUBLIC_API_URL=[http://localhost:3001](http://localhost:3001)
-
+NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
 ---
@@ -155,11 +153,8 @@ NEXT_PUBLIC_API_URL=[http://localhost:3001](http://localhost:3001)
 ## Clone Repository
 
 ```
-
-git clone [https://github.com/yourusername/lottery-system.git](https://github.com/yourusername/lottery-system.git)
-
+git clone https://github.com/yourusername/lottery-system.git
 cd lottery-system
-
 ```
 
 ---
@@ -167,23 +162,16 @@ cd lottery-system
 ## Backend Setup
 
 ```
-
 cd backend
-
 npm install
-
 npx prisma migrate dev
-
 npm run start:dev
-
 ```
 
 Backend runs at:
 
 ```
-
-[http://localhost:3001](http://localhost:3001)
-
+http://localhost:3001
 ```
 
 ---
@@ -191,21 +179,15 @@ Backend runs at:
 ## Frontend Setup
 
 ```
-
 cd frontend
-
 npm install
-
 npm run dev
-
 ```
 
 Frontend runs at:
 
 ```
-
-[http://localhost:3000](http://localhost:3000)
-
+http://localhost:3000
 ```
 
 ---
@@ -217,31 +199,27 @@ Frontend runs at:
 Build Command:
 
 ```
-
 npm install && npm run build
-
 ```
 
 Start Command:
 
 ```
-
 npm run start:prod
-
 ```
 
 ---
 
 ## Frontend → Vercel
 
-Import repository  
-Deploy automatically  
+Import repository
+Deploy automatically
 
 ---
 
 ## Database → Supabase
 
-Create PostgreSQL instance  
+Create PostgreSQL instance
 Add connection URL to `.env`
 
 ---
@@ -250,17 +228,15 @@ Add connection URL to `.env`
 
 You can add:
 
-- Login Page
-- Dashboard
-- Admin Panel
-- Draw Results
+* Login Page
+* Dashboard
+* Admin Panel
+* Draw Results
 
 Example:
 
 ```
-
 ![Dashboard Screenshot](./screenshots/dashboard.png)
-
 ```
 
 ---
@@ -269,23 +245,23 @@ Example:
 
 This project demonstrates:
 
-- Full-Stack Development
-- REST API Design
-- Authentication with JWT
-- Role-Based Authorization
-- Database Modeling
-- Deployment Workflow
-- Production-Level Architecture
+* Full-Stack Development
+* REST API Design
+* Authentication with JWT
+* Role-Based Authorization
+* Database Modeling
+* Deployment Workflow
+* Production-Level Architecture
 
 ---
 
 # 🧠 Future Improvements
 
-- Real Payment Gateway Integration (Stripe/Razorpay)
-- Email Notifications
-- SMS Alerts
-- Scheduled Draw Automation
-- Analytics Dashboard
+* Real Payment Gateway Integration (Stripe/Razorpay)
+* Email Notifications
+* SMS Alerts
+* Scheduled Draw Automation
+* Analytics Dashboard
 
 ---
 
@@ -293,7 +269,7 @@ This project demonstrates:
 
 **Abhishek**
 
-Full-Stack Developer  
+Full-Stack Developer
 Next.js • NestJS • PostgreSQL
 
 ---
@@ -301,6 +277,5 @@ Next.js • NestJS • PostgreSQL
 # ⭐ If You Like This Project
 
 Give it a ⭐ on GitHub!
-```
 
 ---
