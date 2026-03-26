@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Environment
+.env
+
+# NestJS build
+dist
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# IDE
+.vscode
+.idea
+
+# Prisma generated files (keep schema)
+prisma/migrations/*.lock
+
+# Coverage
+coverage
+
+# Temporary files
+tmp
+temp

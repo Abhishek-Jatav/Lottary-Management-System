@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   // USER / ADMIN
+
+  subscription Subscription?
+  scores      Score[]
+  charityId   String?
+  charity     Charity? @relation(fields: [charityId], references: [id])
+
+  winners     Winner[]
+  payments    Payment[]
+  drawResults DrawResult[]   // ✅ ADD THIS LINE
+
+  createdAt DateTime @default(now())
+}
+
+model Subscription {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  status    String   // ACTIVE / INACTIVE
+  plan      String   // MONTHLY / YEARLY
+  startDate DateTime
+  endDate   DateTime
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Score {
+  id     String   @id @default(uuid())
+  value  Int
+  date   DateTime
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Charity {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  image       String?
+
+  users User[]
+}
+
+model Draw {
+  id        String   @id @default(uuid())
+  numbers   Int[]    // drawn numbers
+  createdAt DateTime @default(now())
+
+  results DrawResult[]
+}
+
+model DrawResult {
+  id      String @id @default(uuid())
+  drawId  String
+  userId  String
+  match   Int    // 3 / 4 / 5
+
+  draw Draw @relation(fields: [drawId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Winner {
+  id        String   @id @default(uuid())
+  userId    String
+  drawId    String
+  status    String   // PENDING / APPROVED / REJECTED
+  proof     String?
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Payment {
+  id        String   @id @default(uuid())
+  userId    String
+  amount    Float
+  method    String   // ✅ ADDED (UPI / CARD / WALLET)
+  status    String   // PENDING / SUCCESS / FAILED
+
+  user User @relation(fields: [userId], references: [id])
+}
