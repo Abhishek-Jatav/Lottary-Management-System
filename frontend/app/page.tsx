@@ -1,48 +1,59 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import PortfolioButton from "../app/components/PortfolioButton"; // adjust path if needed
+import PortfolioButton from "../app/components/PortfolioButton";
 
 export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-50 dark:bg-black gap-8 px-6 text-center">
-      {/* Heading */}
-      <h1 className="text-4xl font-bold text-black dark:text-white">
-        🎯 Lottery Management System
-      </h1>
+    <div className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center overflow-hidden">
+      {/* Background Glow Effects */}
+      <div className="absolute inset-0 bg-[#020617]" />
+      <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-100px] right-[-100px] w-[500px] h-[500px] bg-purple-600/20 blur-[120px] rounded-full" />
 
-      {/* Description */}
-      <p className="max-w-xl text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-        A full-stack Lottery Management System built using{" "}
-        <span className="font-semibold">Next.js</span>,{" "}
-        <span className="font-semibold">NestJS</span>, and{" "}
-        <span className="font-semibold">PostgreSQL</span>.
-        <br />
-        <br />
-        Users can participate in lottery draws, submit scores, and claim
-        winnings, while admins manage draws, payments, and winners efficiently.
-      </p>
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center gap-8 max-w-2xl">
+        {/* Heading */}
+        <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight leading-tight">
+          🎯 Lottery Management System
+        </h1>
 
-      {/* Buttons */}
-      <div className="flex gap-4 flex-wrap justify-center">
-        <button
-          onClick={() => router.push("/login")}
-          className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
-          Login
-        </button>
+        {/* Description */}
+        <p className="text-gray-400 text-lg leading-relaxed">
+          A modern full-stack system built using{" "}
+          <span className="text-white font-semibold">Next.js</span>,{" "}
+          <span className="text-white font-semibold">NestJS</span>, and{" "}
+          <span className="text-white font-semibold">PostgreSQL</span>.
+          <br />
+          <br />
+          Participate in lottery draws, track scores, and claim winnings — while
+          admins manage everything seamlessly.
+        </p>
 
-        <button
-          onClick={() => router.push("/register")}
-          className="px-6 py-2 rounded-lg bg-purple-600 text-white font-medium hover:bg-purple-700 transition">
-          Register
-        </button>
-      </div>
+        {/* Buttons */}
+        <div className="flex gap-4 flex-wrap justify-center mt-4">
+          <button
+            onClick={() => router.push("/login")}
+            className="px-6 py-2.5 rounded-xl bg-white text-black font-semibold hover:bg-gray-200 transition-all duration-200 shadow-lg hover:scale-105">
+            Login
+          </button>
 
-      {/* Portfolio Button */}
-      <div className="mt-4">
-        <PortfolioButton /> {/* ✅ ADDED */}
+          <button
+            onClick={() => router.push("/register")}
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:opacity-90 transition-all duration-200 shadow-lg hover:scale-105">
+            Register
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-2" />
+
+        {/* Portfolio Button */}
+        <div className="mt-2">
+          <PortfolioButton />
+        </div>
       </div>
     </div>
   );
