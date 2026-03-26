@@ -8,6 +8,8 @@ export default function Connecting({ error }: { error: string | null }) {
   const [dots, setDots] = useState<string>("");
   const [timeLeft, setTimeLeft] = useState<number>(60);
 
+  const maxTime = 60;
+
   // Dots animation
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,12 +19,12 @@ export default function Connecting({ error }: { error: string | null }) {
     return () => clearInterval(interval);
   }, []);
 
-  // ✅ Timer countdown (auto extend +10 sec)
+  // Timer countdown (auto extend +10 sec)
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          return 10; // 🔥 reset to +10 seconds
+          return 10; // reset to +10 seconds
         }
         return prev - 1;
       });
@@ -31,9 +33,11 @@ export default function Connecting({ error }: { error: string | null }) {
     return () => clearInterval(timer);
   }, []);
 
-  // ✅ Progress fix (prevents overflow after reset)
-  const maxTime = 60;
+  // Progress calculation
   const progress = Math.pow(Math.min(timeLeft, maxTime) / maxTime, 3);
+
+  // ✅ Convert to percentage (0–100)
+  const percentage = Math.round((Math.min(timeLeft, maxTime) / maxTime) * 100);
 
   return (
     <div className="fixed inset-0 w-full h-full bg-[#020617] text-white overflow-hidden z-[9999]">
@@ -64,13 +68,13 @@ export default function Connecting({ error }: { error: string | null }) {
               </div>
             </div>
 
-            {/* Countdown */}
+            {/* ✅ Percentage instead of seconds */}
             <div className="row-span-2 flex flex-col items-center justify-center min-w-[100px]">
               <div className="text-5xl font-extrabold font-mono text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-                {timeLeft}
+                {percentage}%
               </div>
               <div className="text-xs text-white/70 uppercase tracking-wide mt-1">
-                seconds
+                loading
               </div>
             </div>
 
