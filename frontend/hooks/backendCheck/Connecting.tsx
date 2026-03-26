@@ -17,25 +17,23 @@ export default function Connecting({ error }: { error: string | null }) {
     return () => clearInterval(interval);
   }, []);
 
-  // Timer countdown (real 60 sec)
+  // ✅ Timer countdown (auto extend +10 sec)
   useEffect(() => {
-    if (timeLeft <= 0) return;
-
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          clearInterval(timer);
-          return 0;
+          return 10; // 🔥 reset to +10 seconds
         }
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft]);
+  }, []);
 
-  // 🔥 Fake progress illusion (fast → slow)
-  const progress = Math.pow(timeLeft / 60, 3);
+  // ✅ Progress fix (prevents overflow after reset)
+  const maxTime = 60;
+  const progress = Math.pow(Math.min(timeLeft, maxTime) / maxTime, 3);
 
   return (
     <div className="fixed inset-0 w-full h-full bg-[#020617] text-white overflow-hidden z-[9999]">
@@ -59,8 +57,8 @@ export default function Connecting({ error }: { error: string | null }) {
 
               <div className="text-white text-sm mt-2 leading-relaxed font-medium">
                 This app is hosted on a free server, so it may take a moment to
-                wake up. {"     "}
-                <span className="font-semibold text-white ml-4">
+                wake up.{" "}
+                <span className="font-semibold text-white ml-2">
                   Sorry for the wait 🙏
                 </span>
               </div>

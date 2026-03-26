@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
+import PortfolioButton from "../PortfolioButton"; // ✅ IMPORT
 
 export default function Sidebar() {
   const router = useRouter();
@@ -24,12 +25,10 @@ export default function Sidebar() {
 
       setRole(decoded.role);
 
-      // ✅ Protect admin route
       if (pathname === "/admin" && decoded.role !== "ADMIN") {
         router.push("/dashboard");
       }
     } catch (error) {
-      // invalid token
       localStorage.removeItem("token");
       router.push("/login");
     }
@@ -41,29 +40,31 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-64 h-screen bg-gray-900 text-white p-4">
-      <h2 className="text-xl font-bold mb-6">Lottery Dashboard</h2>
+    <div className="w-64 h-screen bg-gray-900 text-white p-4 flex flex-col justify-between">
+      {/* TOP */}
+      <div>
+        <h2 className="text-xl font-bold mb-6">Lottery Dashboard</h2>
 
-      <nav className="flex flex-col gap-3">
-        <Link href="/dashboard">Dashboard</Link>
+        <nav className="flex flex-col gap-3">
+          <Link href="/dashboard">Dashboard</Link>
+          <Link href="/scores">Add Scores</Link>
+          <Link href="/draw">Latest Draw</Link>
+          <Link href="/payment">Payments</Link>
+          <Link href="/winner">Winners</Link>
 
-        <Link href="/scores">Add Scores</Link>
+          {role === "ADMIN" && <Link href="/admin">Admin Panel</Link>}
+        </nav>
+      </div>
 
-        <Link href="/draw">Latest Draw</Link>
-
-        <Link href="/payment">Payments</Link>
-
-        <Link href="/winner">Winners</Link>
-
-        {/* ✅ Only visible to ADMIN */}
-        {role === "ADMIN" && <Link href="/admin">Admin Panel</Link>}
-
+      {/* BOTTOM */}
+      <div className="flex flex-col gap-4">
+        <PortfolioButton /> {/* ✅ ADDED */}
         <button
           onClick={logout}
-          className="mt-6 bg-red-500 hover:bg-red-600 p-2 rounded">
+          className="bg-red-500 hover:bg-red-600 p-2 rounded">
           Logout
         </button>
-      </nav>
+      </div>
     </div>
   );
 }
