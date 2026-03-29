@@ -6,6 +6,12 @@ import PortfolioButton from "../app/components/PortfolioButton";
 export default function Home() {
   const router = useRouter();
 
+  // ✅ Test Credentials
+  const testData = {
+    email: "testadmin@gmail.com",
+    password: "123456",
+  };
+
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center overflow-hidden">
       {/* Background Glow Effects */}
@@ -31,6 +37,15 @@ export default function Home() {
           Participate in lottery draws, track scores, and claim winnings — while
           admins manage everything seamlessly.
         </p>
+
+        {/* Test Credentials Display */}
+        <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-gray-300">
+          <p className="font-semibold text-white mb-1">
+            Test Credentials for Admin Only
+          </p>
+          <p>Email: {testData.email}</p>
+          <p>Password: {testData.password}</p>
+        </div>
 
         {/* Buttons */}
         <div className="flex gap-4 flex-wrap justify-center mt-4">
