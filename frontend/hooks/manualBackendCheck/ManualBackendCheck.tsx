@@ -121,7 +121,7 @@ export default function ManualBackendCheck() {
             onClick={() => router.push("/home")}
             className="w-full py-3 rounded-xl bg-green-600 text-white font-medium 
             hover:scale-[1.02] active:scale-[0.98] transition-all">
-            Go to Dashboard →
+            Go to Home →
           </button>
         )}
       </div>
