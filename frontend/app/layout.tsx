@@ -12,7 +12,8 @@ export default function RootLayout({
       <body className="bg-[#0B0F19] text-[#E6EDF3] antialiased">
         {/* Main App */}
         <div className="min-h-screen bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#020617]">
-          <BackendGate>{children}</BackendGate>
+          {/* <BackendGate>{children}</BackendGate> */}
+          {children}
         </div>
 
         {/* Premium Toaster */}
