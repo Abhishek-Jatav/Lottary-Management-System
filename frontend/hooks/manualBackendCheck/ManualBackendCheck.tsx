@@ -5,6 +5,19 @@ import { useRouter } from "next/navigation";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL as string;
 
+// ⏱️ helper: fetch with timeout
+const fetchWithTimeout = async (url: string, timeout = 5000) => {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    return res;
+  } finally {
+    clearTimeout(id);
+  }
+};
+
 export default function ManualBackendCheck() {
   const router = useRouter();
 
@@ -13,6 +26,10 @@ export default function ManualBackendCheck() {
   const [cooldown, setCooldown] = useState(0);
   const [statusText, setStatusText] = useState("Backend Sleeping");
 
+  const startCooldown = () => {
+    setCooldown(60);
+  };
+
   const wakeBackend = async () => {
     if (cooldown > 0 || !BACKEND_URL) return;
 
@@ -20,41 +37,43 @@ export default function ManualBackendCheck() {
     setStatusText("Waking server... ⚡");
 
     try {
-      // 🔥 Step 1: FAST ping (wake backend)
-      await fetch(`${BACKEND_URL}/ping`);
+      // 🔥 Step 1: FAST ping with timeout
+      await fetchWithTimeout(`${BACKEND_URL}/ping`, 5000);
 
-      // 🔄 Step 2: wait a bit before full health check
+      // 🔄 Step 2: wait before health check
       setStatusText("Checking database... ⏳");
-
       await new Promise((res) => setTimeout(res, 2000));
 
-      // 🧠 Step 3: Full health check
-      const res = await fetch(`${BACKEND_URL}/health`);
+      // 🧠 Step 3: Full health check with timeout
+      const res = await fetchWithTimeout(`${BACKEND_URL}/health`, 5000);
 
       if (res.ok) {
         setIsHealthy(true);
         setStatusText("Backend Ready ✅");
       } else {
-        startCooldown();
         setStatusText("Server not ready ❌");
+        startCooldown();
       }
     } catch (err) {
+      // ❌ Covers timeout, network error, abort, no response
+      setStatusText("No response from server ❌");
       startCooldown();
-      setStatusText("Connection failed ❌");
     }
 
     setLoading(false);
-  };
-
-  const startCooldown = () => {
-    setCooldown(60);
   };
 
   useEffect(() => {
     if (cooldown <= 0) return;
 
     const interval = setInterval(() => {
-      setCooldown((prev) => prev - 1);
+      setCooldown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
@@ -110,10 +129,7 @@ export default function ManualBackendCheck() {
   );
 }
 
-
-
-// page 
-
+// page
 
 // import ReactionTestGame from "@/hooks/backendCheck/game/reactionTest/reactionTestGame";
 // import ManualBackendCheck from "../hooks/manualBackendCheck/ManualBackendCheck";
@@ -133,4 +149,3 @@ export default function ManualBackendCheck() {
 //     </div>
 //   );
 // }
-
