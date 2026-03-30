@@ -47,6 +47,14 @@ export default function Home() {
           <p>Password: {testData.password}</p>
         </div>
 
+        {/* Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-2" />
+
+        {/* Portfolio Button */}
+        <div className="mt-2">
+          <PortfolioButton />
+        </div>
+
         {/* Buttons */}
         <div className="flex gap-4 flex-wrap justify-center mt-4">
           <button
@@ -60,14 +68,6 @@ export default function Home() {
             className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:opacity-90 transition-all duration-200 shadow-lg hover:scale-105">
             Register
           </button>
-        </div>
-
-        {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-2" />
-
-        {/* Portfolio Button */}
-        <div className="mt-2">
-          <PortfolioButton />
         </div>
       </div>
     </div>
